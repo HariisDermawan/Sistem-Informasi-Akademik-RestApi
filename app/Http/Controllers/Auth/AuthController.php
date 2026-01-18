@@ -2,57 +2,31 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Auth\LoginRequest;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function store(LoginRequest $request): Response
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Email/password salah'], 401);
-        }
-
-        $user = Auth::user();
-        $token = $user->createToken('api-login')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Login berhasil',
-            'token' => $token,
-            'user' => $user,
-        ]);
-    }
-
-
-
-    public function loginSubmit(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        if (!Auth::attempt($credentials)) {
-            return back()->withErrors(['email' => 'Email atau password salah']);
-        }
+        $request->authenticate();
 
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard');
+        return response()->noContent();
     }
 
-    public function logout(Request $request)
+    public function destroy(Request $request): Response
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
+
         $request->session()->invalidate();
+
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return response()->noContent();
     }
 }
