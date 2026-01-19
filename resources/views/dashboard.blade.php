@@ -17,10 +17,8 @@
                         <img src="{{ asset('img/unpam.png') }}" alt="AnalyticsPro Logo"
                             class="w-full h-full object-contain">
                     </div>
-
                     <div>
-                        <h1 class="text-xl font-bold text-gray-800">UNIVERSITAS <b><span
-                                    class="text-blue-600">PAMULANG</span></b></h1>
+                        <h1 class="text-xl font-bold text-gray-800">UNIVERSITAS <b><span class="text-blue-600">PAMULANG</span></b></h1>
                     </div>
                 </div>
             </div>
