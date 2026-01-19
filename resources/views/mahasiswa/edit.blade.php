@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="bg-gray-50">
     <div class="flex h-screen">
         <aside id="sidebar" class="sidebar-transition w-64 bg-white border-r border-gray-200 flex flex-col">
@@ -27,19 +28,17 @@
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="{{ route('dashboard') }}"
-                            class="flex items-center space-x-3 p-3 rounded-lg bg-blue-50 text-blue-600">
+                        <a href="#" class="flex items-center space-x-3 p-3 rounded-lg bg-blue-50 text-blue-600">
                             <i class="fas fa-home text-lg"></i>
                             <span class="font-medium">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('mahasiswas.index') }}"
+                        <a href="#"
                             class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100">
                             <i class="fas fa-users text-lg"></i>
                             <span class="font-medium">Data Mahasiswa</span>
                         </a>
-
                     </li>
                     <li>
                         <a href="#"
@@ -49,16 +48,12 @@
                         </a>
                     </li>
                     <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit"
-                                class="flex items-center space-x-3 p-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors">
-                                <i class="fas fa-power-off text-lg"></i>
-                                <span class="font-medium">Logout</span>
-                            </button>
-                        </form>
+                        <a href="#"
+                            class="flex items-center space-x-3 p-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors">
+                            <i class="fas fa-power-off text-lg"></i>
+                            <span class="font-medium">Logout</span>
+                        </a>
                     </li>
-
                 </ul>
             </nav>
             <div class="p-4 border-t border-gray-200">
@@ -93,7 +88,6 @@
                     </div>
                 </div>
             </header>
-
 
             <main class="flex-1 overflow-y-auto p-4 md:p-6">
                 <!-- Statistik Akademik -->
@@ -153,21 +147,42 @@
                             <table class="w-full">
                                 <thead>
                                     <tr class="text-left text-gray-500 text-sm border-b">
-                                        <th class="pb-3 font-medium">ID</th>
                                         <th class="pb-3 font-medium">NIM</th>
                                         <th class="pb-3 font-medium">Nama</th>
                                         <th class="pb-3 font-medium">Jurusan</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-sm">
-                                    @foreach ($mhs as $item)
-                                       <tr class="border-b border-gray-100 hover:bg-gray-50">
-                                        <td class="py-3">{{ $item->id }}</td>
-                                        <td class="py-3 font-medium">{{ $item->nim }}</td>
-                                        <td class="py-3">{{ $item->nama }}</td>
-                                        <td class="py-3">{{ $item->jurusan }}</td>
-                                    </tr> 
-                                    @endforeach
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 font-medium">202401001</td>
+                                        <td class="py-3">Andi Pratama</td>
+                                        <td class="py-3">Teknik Informatika</td>
+
+                                    </tr>
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 font-medium">202401002</td>
+                                        <td class="py-3">Siti Rahayu</td>
+                                        <td class="py-3">Sistem Informasi</td>
+
+                                    </tr>
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 font-medium">202301045</td>
+                                        <td class="py-3">Budi Santoso</td>
+                                        <td class="py-3">Teknik Elektro</td>
+
+                                    </tr>
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 font-medium">202202123</td>
+                                        <td class="py-3">Dewi Anggraini</td>
+                                        <td class="py-3">Manajemen</td>
+
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 font-medium">202201078</td>
+                                        <td class="py-3">Rizky Ramadhan</td>
+                                        <td class="py-3">Akuntansi</td>
+
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -181,22 +196,41 @@
                             <table class="w-full">
                                 <thead>
                                     <tr class="text-left text-gray-500 text-sm border-b">
-                                        <th class="pb-3 font-medium">ID</th>
-                                        <th class="pb-3 font-medium">NIP</th>
+                                        <th class="pb-3 font-medium">NIDN</th>
                                         <th class="pb-3 font-medium">Nama</th>
-                                        <th class="pb-3 font-medium">Jurusan</th>
+                                        <th class="pb-3 font-medium">Jabatan</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-sm">
-                                    @foreach ($dns as $data)
-                                        <tr class="border-b border-gray-100 hover:bg-gray-50">
-                                        <td class="py-3 font-medium">{{ $data->id }}</td>
-                                        <td class="py-3 font-medium">{{ $data->nip }}</td>
-                                        <td class="py-3">{{ $data->nama }}</td>
-                                        <td class="py-3">{{ $data->jurusan }}</td>
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 font-medium">0012038501</td>
+                                        <td class="py-3">Dr. Ahmad Wijaya, M.Kom.</td>
+                                        <td class="py-3">Dosen Tetap</td>
+
                                     </tr>
-                                    @endforeach
-                                    
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 font-medium">0015089202</td>
+                                        <td class="py-3">Prof. Dr. Sari Dewi, M.Si.</td>
+                                        <td class="py-3">Guru Besar</td>
+
+                                    </tr>
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 font-medium">0021097803</td>
+                                        <td class="py-3">Rina Setiawati, S.T., M.T.</td>
+                                        <td class="py-3">Dosen Tetap</td>
+
+                                    </tr>
+                                    <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                        <td class="py-3 font-medium">0018056704</td>
+                                        <td class="py-3">Bambang Sugianto, S.E., M.M.</td>
+                                        <td class="py-3">Dosen Luar Biasa</td>
+
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 font-medium">0023041205</td>
+                                        <td class="py-3">Dr. Maya Indah, M.Pd.</td>
+                                        <td class="py-3">Dosen Tetap</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -205,22 +239,7 @@
             </main>
         </div>
     </div>
-    <div id="login-toast"
-        class="fixed top-4 right-4 bg-green-500 text-white px-4 py-3 rounded-lg shadow-lg opacity-0 transform translate-x-20 transition-all duration-500">
-        Login Susseccfully!
-    </div>
-
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
-<script src="{{ asset('js/app.js') }}"></script>
-<script>
-    @if (session('success'))
-        const toast = document.getElementById('login-toast');
-        toast.classList.remove('opacity-0', 'translate-x-20');
-        toast.classList.add('opacity-100', 'translate-x-0');
-        setTimeout(() => {
-            toast.classList.add('opacity-0', 'translate-x-20');
-            toast.classList.remove('opacity-100', 'translate-x-0');
-        }, 3000);
-    @endif
-</script>
+
 </html>

@@ -11,12 +11,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'store'])->name('login.submit');
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('mahasiswas', MahasiswaController::class);
+    Route::resource('dosens', DosenController::class);
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
-
-    Route::middleware('admin')->group(function () {
-        Route::resource('mahasiswa', MahasiswaController::class);
-        Route::resource('dosen', DosenController::class);
-    });
 });

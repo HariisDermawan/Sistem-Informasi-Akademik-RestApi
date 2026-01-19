@@ -7,22 +7,24 @@ use Illuminate\Http\Request;
 class AdminMiddleware
 {
     public function handle(Request $request, Closure $next)
-    {
-        $user = $request->user();
-        if (!$user) {
-            return response()->json([
-                'meta' => ['code'=>401,'status'=>'error','message'=>'Unauthenticated'],
-                'data'=>null
-            ], 401);
-        }
+{
+    $user = auth()->user();
 
-        if ($user->role !== 'admin') {
-            return response()->json([
-                'meta' => ['code'=>403,'status'=>'error','message'=>'Hanya admin yang bisa mengakses'],
-                'data'=>null
-            ], 403);
+    if (!$user) {
+        if ($request->expectsJson()) {
+            return response()->json(['message'=>'Unauthenticated'], 401);
         }
-
-        return $next($request);
+        return redirect()->route('login');
     }
+
+    if ($user->role !== 'admin') {
+        if ($request->expectsJson()) {
+            return response()->json(['message'=>'Forbidden'], 403);
+        }
+        abort(403);
+    }
+
+    return $next($request);
+}
+
 }

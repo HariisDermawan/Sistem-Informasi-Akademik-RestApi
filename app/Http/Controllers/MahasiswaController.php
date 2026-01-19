@@ -16,7 +16,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $mahasiswa = Mahasiswa::all();
-        return new MahasiswaCollection($mahasiswa);
+        return view('mahasiswa.index', compact('mahasiswa'));
     }
 
     /**
@@ -46,19 +46,19 @@ class MahasiswaController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
-{
-    $data = $request->validate([
-        'nim' => 'required|string|unique:mahasiswas,nim,' . $mahasiswa->id,
-        'nama' => 'required|string|max:255',
-        'jurusan' => 'required|string|max:100'
-    ]);
+    {
+        $data = $request->validate([
+            'nim' => 'required|string|unique:mahasiswas,nim,' . $mahasiswa->id,
+            'nama' => 'required|string|max:255',
+            'jurusan' => 'required|string|max:100'
+        ]);
 
-    $mahasiswa->update($data);
+        $mahasiswa->update($data);
 
-    return new MahasiswaResource($mahasiswa);
-}
+        return new MahasiswaResource($mahasiswa);
+    }
 
-    
+
 
     /**
      * Remove the specified resource from storage.

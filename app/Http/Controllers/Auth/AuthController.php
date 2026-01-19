@@ -15,18 +15,19 @@ class AuthController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
+        $request->session()->flash('success', 'Login Successfully!');
         return response()->noContent();
+        
     }
 
-    public function destroy(Request $request): Response
-    {
-        Auth::guard('web')->logout();
+    public function destroy(Request $request)
+{
+    Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
-        $request->session()->regenerateToken();
-
-        return response()->noContent();
-    }
+    // Ganti response()->noContent() menjadi redirect ke login
+    return redirect()->route('login');
+}
 }
