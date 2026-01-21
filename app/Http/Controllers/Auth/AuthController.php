@@ -15,7 +15,7 @@ class AuthController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        $request->session()->flash('success', 'Login Successfully!');
+        $request->session()->flash('success', 'Login Berhasil!');
         return response()->noContent();
         
     }

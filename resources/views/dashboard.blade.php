@@ -40,7 +40,7 @@
 
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('dosens.index') }}"
                             class="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
                             <i class="fas fa-chalkboard-teacher text-lg"></i>
                             <span class="font-medium">Data Dosen</span>
@@ -101,7 +101,7 @@
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
                                 <p class="text-gray-500 text-sm">Total Mahasiswa</p>
-                                <h3 class="text-2xl font-bold text-gray-800 mt-1">1,245</h3>
+                                <h3 class="text-2xl font-bold text-gray-800 mt-1">{{ $mahasiswaCount }}</h3>
 
                             </div>
                             <div class="w-16 h-16 rounded-lg bg-blue-100 flex items-center justify-center ml-4">
@@ -115,7 +115,7 @@
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
                                 <p class="text-gray-500 text-sm">Total Dosen</p>
-                                <h3 class="text-2xl font-bold text-gray-800 mt-1">48</h3>
+                                <h3 class="text-2xl font-bold text-gray-800 mt-1">{{ $dosenCount }}</h3>
 
                             </div>
                             <div class="w-16 h-16 rounded-lg bg-green-100 flex items-center justify-center ml-4">
@@ -154,19 +154,24 @@
                                         <th class="pb-3 font-medium">ID</th>
                                         <th class="pb-3 font-medium">NIM</th>
                                         <th class="pb-3 font-medium">Nama</th>
-                                        <th class="pb-3 font-medium">Jurusan</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-sm">
-                                    @foreach ($mhs as $item)
-                                       <tr class="border-b border-gray-100 hover:bg-gray-50">
-                                        <td class="py-3">{{ $item->id }}</td>
-                                        <td class="py-3 font-medium">{{ $item->nim }}</td>
-                                        <td class="py-3">{{ $item->nama }}</td>
-                                        <td class="py-3">{{ $item->jurusan }}</td>
-                                    </tr> 
-                                    @endforeach
-                                </tbody>
+                                  <tbody class="text-sm text-gray-700 divide-y">
+                                @foreach ($mhs as $item)
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-4 py-3">{{ $item->id }}</td>
+                                        <td class="px-4 py-3 font-medium">{{ $item->nim }}</td>
+                                        <td class="px-4 py-3">{{ $item->nama }}</td>
+                                        <td class="px-4 py-3">
+                                            <span
+                                                class="px-3 py-1 text-xs font-medium rounded-full bg-blue-50 text-blue-700">
+                                                {{ $item->jurusan }}
+                                            </span>
+                                        </td>
+                                        
+                                    </tr>
+                                @endforeach
+                            </tbody>
                             </table>
                         </div>
                     </div>
@@ -182,20 +187,24 @@
                                         <th class="pb-3 font-medium">ID</th>
                                         <th class="pb-3 font-medium">NIP</th>
                                         <th class="pb-3 font-medium">Nama</th>
-                                        <th class="pb-3 font-medium">Jurusan</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-sm">
-                                    @foreach ($dns as $data)
-                                        <tr class="border-b border-gray-100 hover:bg-gray-50">
-                                        <td class="py-3 font-medium">{{ $data->id }}</td>
-                                        <td class="py-3 font-medium">{{ $data->nip }}</td>
-                                        <td class="py-3">{{ $data->nama }}</td>
-                                        <td class="py-3">{{ $data->jurusan }}</td>
+                                  <tbody class="text-sm text-gray-700 divide-y">
+                                @foreach ($dns as $item)
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-4 py-3">{{ $item->id }}</td>
+                                        <td class="px-4 py-3 font-medium">{{ $item->nip }}</td>
+                                        <td class="px-4 py-3">{{ $item->nama }}</td>
+                                        <td class="px-4 py-3">
+                                            <span
+                                                class="px-3 py-1 text-xs font-medium rounded-full bg-blue-50 text-green-700">
+                                                {{ $item->jurusan }}
+                                            </span>
+                                        </td>
+                                        
                                     </tr>
-                                    @endforeach
-                                    
-                                </tbody>
+                                @endforeach
+                            </tbody>
                             </table>
                         </div>
                     </div>

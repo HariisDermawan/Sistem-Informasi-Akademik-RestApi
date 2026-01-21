@@ -10,47 +10,42 @@ use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // ===== WEB =====
     public function index()
     {
-        $mahasiswa = Mahasiswa::all();
+        $mahasiswa = Mahasiswa::orderBy('id')->paginate(10);
         return view('mahasiswa.index', compact('mahasiswa'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function edit(Mahasiswa $mahasiswa)
+    {
+        return view('mahasiswa.edit', compact('mahasiswa'));
+    }
+
+    public function show(Mahasiswa $mahasiswa)
+    {
+        return new MahasiswaResource($mahasiswa);
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate([
             'nim' => 'required|string|unique:mahasiswas,nim',
-            'nama' => 'required|string|max:255',
-            'jurusan' => 'required|string|max:100'
+            'nama' => 'required|string',
+            'jurusan' => 'required|string'
         ]);
-        $mahasiswa = Mahasiswa::create($data);
-        return new MahasiswaResource($mahasiswa);
+
+        return new MahasiswaResource(
+            Mahasiswa::create($data)
+        );
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Mahasiswa $mahasiswa)
-    {
-        // Langsung return resource
-        return new MahasiswaResource($mahasiswa);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
         $data = $request->validate([
             'nim' => 'required|string|unique:mahasiswas,nim,' . $mahasiswa->id,
-            'nama' => 'required|string|max:255',
-            'jurusan' => 'required|string|max:100'
+            'nama' => 'required|string',
+            'jurusan' => 'required|string'
         ]);
 
         $mahasiswa->update($data);
@@ -58,18 +53,11 @@ class MahasiswaController extends Controller
         return new MahasiswaResource($mahasiswa);
     }
 
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Mahasiswa $mahasiswa)
     {
-        $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->delete();
-        return response()->json([
-            'message' =>
-            'Deleted Successfully!'
-        ], 200);
+
+        return response()->json(['message' => 'Deleted']);
     }
 }
+

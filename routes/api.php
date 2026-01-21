@@ -5,7 +5,7 @@ use App\Http\Controllers\DosenController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', [AuthController::class, 'apiLogin']); 
+Route::post('/login', [AuthController::class, 'store']); 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', fn ($request) => $request->user());
     Route::post('/logout', [AuthController::class, 'apiLogout']);

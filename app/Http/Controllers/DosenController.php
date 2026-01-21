@@ -12,10 +12,14 @@ class DosenController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Dosen $dosen)
     {
-        $dosen = Dosen::all();
-        return new DosenCollection($dosen);
+        $dosen = Dosen::orderBy('id')->paginate(5);
+        if($request->expectsJson()){
+            return new DosenResource($dosen);
+        }
+
+        return view('dosen.index', compact('dosen'));
     }
 
     /**
